@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useNavigationBuilderContext } from './NavigationBuilderContext';
+import { NavigationBuilderContext } from './NavigationBuilderContext';
 
 /**
  * When screen config changes, we want to update the navigator in the same update phase.
@@ -11,7 +11,7 @@ import { useNavigationBuilderContext } from './NavigationBuilderContext';
  * This lets nested updates be applied from the root down without clobbering each other.
  */
 export function useScheduleUpdate(callback: () => void) {
-  const { scheduleUpdate, flushUpdates } = useNavigationBuilderContext();
+  const { scheduleUpdate, flushUpdates } = React.use(NavigationBuilderContext);
 
   React.useInsertionEffect(() => {
     scheduleUpdate(callback);
